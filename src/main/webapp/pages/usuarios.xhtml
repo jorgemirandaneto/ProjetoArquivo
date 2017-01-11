@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	template="/templates/modelo.xhtml">
+
+	<ui:define name="conteudo">
+
+
+		<h:form id="formListagem">
+			<p:panel header="Usuários">
+				<p:dataTable id="tabela" emptyMessage="Nenhum registro encontrado"
+					paginator="true" rows="10" paginatorPosition="top"
+					value="#{usuarioBean.usuarios}" var="usuario">
+					<f:facet name="header">
+						<p:commandButton value="Novo" oncomplete="PF('dialogo').show();"
+							actionListener="#{usuarioBean.novo}"
+							update=":mensagem :formCadastro:painel">
+							<f:actionListener
+								type="org.omnifaces.eventlistener.ResetInputAjaxActionListener" />
+						</p:commandButton>
+					</f:facet>
+
+					<p:column headerText="Nome">
+						<h:outputText value="#{usuario.nome}" />
+					</p:column>
+
+					<p:column headerText="CPF">
+						<h:outputText value="#{usuario.cpf}" />
+					</p:column>
+
+					<p:column headerText="Tipo">
+						<h:outputText value="#{usuario.tipoFormatado}" />
+					</p:column>
+
+					<p:column headerText="Status">
+						<h:outputText value="#{usuario.ativoFormatado}" />
+					</p:column>
+
+					<p:column headerText="Opções">
+						<p:commandButton icon="ui-icon-pencil" actionListener="#{usuarioBean.editar}" oncomplete="PF('dialogo').show();" update=":formCadastro:painel">
+							<f:attribute name="usuarioSelecionado" value="#{usuario}"/>
+							<f:actionListener
+							type="org.omnifaces.eventlistener.ResetInputAjaxActionListener" />
+						</p:commandButton>
+						
+
+						<p:commandButton icon="ui-icon-circlesmall-close"
+							actionListener="#{usuarioBean.excluir}" update=":mensagem :formListagem:tabela">
+							<p:confirm header="Confirmacão" message="Você deseja excluir?"
+								icon="ui-icon-alert" />
+							<f:attribute name="usuarioSelecionado" value="#{usuario}" />
+
+						</p:commandButton>
+					</p:column>
+				</p:dataTable>
+
+				<p:confirmDialog global="true">
+					<p:commandButton value="Sim" type="button"
+						styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+
+					<p:commandButton value="Não" type="button"
+						styleClass="ui-confirmdialog-no" icon="ui-icon-check" />
+				</p:confirmDialog>
+			</p:panel>
+		</h:form>
+
+
+
+		<p:dialog header="Usuário - Cadastro" modal="true" closable="false"
+			resizable="false" widgetVar="dialogo" draggable="false">
+			<h:form id="formCadastro">
+				<h:panelGrid id="painel" columns="2">
+					<p:outputLabel for="nome" value="Nome: ">
+					</p:outputLabel>
+					<p:inputText id="nome" maxlength="50" size="15"
+						value="#{usuarioBean.usuario.nome}" required="true"
+						requiredMessage="Por favor preencher o nome." />
+
+					<p:outputLabel for="cpf" value="CPF: ">
+					</p:outputLabel>
+					<p:inputMask id="cpf" mask="99999999999" size="15"
+						value="#{usuarioBean.usuario.cpf}" required="true"
+						requiredMessage="Por favor preencher o cpf.">
+					</p:inputMask>
+
+					<p:outputLabel for="senha" value="Senha: ">
+					</p:outputLabel>
+					<p:password id="senha" size="20" maxlength="32"
+						value="#{usuarioBean.usuario.senhaSemCriptografia}"
+						required="true" requiredMessage="Por favor preencher a senha" />
+
+					<p:outputLabel for="tipo" value="Tipo: ">
+					</p:outputLabel>
+					<p:selectOneRadio id="tipo" value="#{usuarioBean.usuario.tipo}"
+						required="true" requiredMessage="Por favor preencher o tipo.">
+						<f:selectItem itemValue="A" itemLabel="Administrador"/>
+						<f:selectItem itemValue="B" itemLabel="Apoio" />
+					</p:selectOneRadio>
+
+					<p:outputLabel value="Status: ">
+					</p:outputLabel>
+					<p:selectBooleanCheckbox value="#{usuarioBean.usuario.ativo}"
+						disabled="false" />
+				</h:panelGrid>
+				<h:panelGrid columns="2">
+					<p:commandButton value="Salvar"
+						actionListener="#{usuarioBean.salvar}"
+						update=":mensagem :formCadastro:painel :formListagem:tabela" />
+					<p:commandButton value="Fechar" oncomplete="PF('dialogo').hide();" />
+				</h:panelGrid>
+
+			</h:form>
+		</p:dialog>
+	</ui:define>
+</ui:composition>

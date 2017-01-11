@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	template="/templates/modelo.xhtml">
+
+	<ui:define name="conteudo">
+		<h:form id="formListagem">
+			<p:panel header="Processo - Saída">
+				<p:dataTable id="tabela" emptyMessage="Nenhum registro encontrado"
+					paginator="true" rows="10" paginatorPosition="top"
+					value="#{fechamentoBean.processos}" var="processo">
+
+					<p:column headerText="SPU: " sortBy="#{processo.spu}"
+						filterBy="#{processo.spu}">
+						<h:outputText value="#{processo.spu}" />
+					</p:column>
+
+					<p:column headerText="Requerente: "
+						sortBy="#{processo.solicitante}"
+						filterBy="#{processo.solicitante}">
+						<h:outputText value="#{processo.solicitante}" />
+					</p:column>
+
+					<p:column headerText="Assunto: ">
+						<h:outputText value="#{processo.assunto}" />
+					</p:column>
+
+					<p:column headerText="Data da entrada">
+						<h:outputText value="#{processo.dataEntrada}">
+							<f:convertDateTime locale="pt_BR" />
+						</h:outputText>
+					</p:column>
+
+					<p:column headerText="Servidor responsável: ">
+						<h:outputText value="#{processo.servidorResponsavel}" />
+					</p:column>
+
+					<p:column headerText="Remetente: ">
+						<h:outputText
+							value="#{processo.setor.orgao.sigla} - #{processo.setor.nome}" />
+					</p:column>
+
+					<p:column headerText="Opções" style=" width: 195px;  height: 35px; ">
+						<p:panel columns="2">
+							<p:commandButton value="Finalizar" icon="ui-icon-check"
+								actionListener="#{fechamentoBean.finalizar}"
+								update=":mensagem :formListagem:tabela :formCadastro:painel"
+								oncomplete="PF('dialogo').show();">
+								<f:attribute name="finalizadoSelecionado" value="#{processo}" />
+								<f:actionListener
+									type="org.omnifaces.eventlistener.ResetInputAjaxActionListener" />
+							</p:commandButton>
+							<p:commandButton value="Declaração" icon="ui-icon-document" actionListener="#{fechamentoBean.imprimir}">
+							<f:attribute name="impressaoSelecionado" value="#{processo}"/>
+							</p:commandButton>
+						</p:panel>
+					</p:column>
+				</p:dataTable>
+			</p:panel>
+		</h:form>
+
+		<p:dialog widgetVar="dialogo" header="Processo - Saída"
+			draggable="false" modal="true" closable="false" resizable="false">
+			<h:form id="formCadastro">
+				<h:panelGrid id="painel" columns="2">
+					<p:outputLabel for="despacho" value="Nº do despacho: " />
+					<p:inputMask id="despacho" mask="999/9999" required="true"
+						requiredMessage="Digitar o número do despacho"
+						value="#{fechamentoBean.processo.nDespacho}" />
+
+					<p:outputLabel for="saida" value="Data da saída: " />
+					<p:calendar id="saida" value="#{fechamentoBean.processo.dataSaida}"
+						required="true"
+						requiredMessage="Data da saída do processo tem que ser preenchida" />
+
+					<p:outputLabel value="Já foi tramitado no SPU? " />
+					<p:selectBooleanCheckbox rendered="true"
+						requiredMessage="Já foi tramitado no SPU?"
+						value="#{fechamentoBean.processo.situacao}">
+					</p:selectBooleanCheckbox>
+				</h:panelGrid>
+				<h:panelGrid id="painelRadio" columns="3">
+					<p:selectOneRadio id="status"
+						value="#{fechamentoBean.processo.status}" required="true"
+						requiredMessage="Por favor preencher o Status.">
+						<f:selectItem itemValue="A" itemLabel="Atendido" />
+						<f:selectItem itemValue="P" itemLabel="Parcialmente atendido" />
+						<f:selectItem itemValue="N" itemLabel="Não atendido" />
+					</p:selectOneRadio>
+				</h:panelGrid>
+
+				<h:panelGrid columns="2" id="painelText">
+					<p:outputLabel for="text" value="Observação: " />
+					<p:inputTextarea id="text" required="True"
+						requiredMessage="Digite uma observação"
+						value="#{fechamentoBean.processo.observacao}" />
+				</h:panelGrid>
+				<h:panelGrid columns="2" id="painelBotao">
+					<p:commandButton value="Salvar"
+						actionListener="#{fechamentoBean.salvar}"
+						update=":mensagem :formListagem:tabela :formCadastro:painel :formCadastro:painelRadio :formCadastro:painelText :formCadastro:painelBotao">
+					</p:commandButton>
+					<p:commandButton value="Fechar" oncomplete="PF('dialogo').hide();" />
+				</h:panelGrid>
+			</h:form>
+		</p:dialog>
+	</ui:define>
+</ui:composition>

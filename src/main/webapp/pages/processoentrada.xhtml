@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	template="/templates/modelo.xhtml">
+
+	<ui:define name="conteudo">
+		<h:form id="formListagem">
+			<p:panel header="Processo - Entrada">
+				<p:dataTable id="tabela" emptyMessage="Nenhum registro encontrado"
+					paginator="true" rows="10" paginatorPosition="top"
+					value="#{processoBean.processos}" var="processo">
+					<f:facet name="header">
+						<p:commandButton value="Novo - Processo"
+							oncomplete="PF('dialogo').show();"
+							actionListener="#{processoBean.novo}"
+							update=":mensagem :formCadastro:painel">
+							<f:actionListener
+								type="org.omnifaces.eventlistener.ResetInputAjaxActionListener" />
+						</p:commandButton>
+					</f:facet>
+
+					<p:column headerText="SPU: " filterBy="#{processo.spu}"
+						sortBy="#{processo.spu}">
+						<h:outputText value="#{processo.spu}" />
+					</p:column>
+
+					<p:column headerText="Requerente: "
+						filterBy="#{processo.solicitante}" sortBy="#{processo.spu}">
+						<h:outputText value="#{processo.solicitante}" />
+					</p:column>
+
+					<p:column headerText="Assunto: ">
+						<h:outputText value="#{processo.assunto.nomeAssunto}" />
+					</p:column>
+
+					<p:column headerText="Data de recebimento">
+						<h:outputText value="#{processo.dataEntrada}">
+							<f:convertDateTime locale="pt_BR" pattern="dd/MM/yyyy" />
+						</h:outputText>
+					</p:column>
+
+					<p:column headerText="Remetente: ">
+						<h:outputText
+							value="#{processo.setor.orgao.sigla} - #{processo.setor.nome}" />
+					</p:column>
+
+
+					<p:column headerText="Opções">
+						<div align="center">
+							<p:commandButton value="Editar"
+								actionListener="#{processoBean.editar}"
+								update=":mensagem :formListagem:tabela :formCadastro:painel"
+								oncomplete="PF('dialogo').show();">
+								<f:attribute name="processoSelecionado" value="#{processo}" />
+								<f:actionListener
+									type="org.omnifaces.eventlistener.ResetInputAjaxActionListener" />
+							</p:commandButton>
+						</div>
+					</p:column>
+
+
+				</p:dataTable>
+			</p:panel>
+		</h:form>
+
+		<p:dialog widgetVar="dialogo" header="Processo - Entrada"
+			draggable="false" modal="true" closable="false" resizable="false">
+			<h:form id="formCadastro">
+				<div align="center">
+					<h:panelGrid id="painel" columns="2">
+						<p:outputLabel for="spu" value="SPU: " />
+						<p:inputMask id="spu" mask="a999999/9999" required="true"
+							requiredMessage="Campo SPU não preenchido"
+							value="#{processoBean.processo.spu}" />
+
+						<p:outputLabel for="requerente" value="Requerente: " />
+						<p:inputText id="requerente"
+							value="#{processoBean.processo.solicitante}" required="true"
+							requiredMessage="Campo Requerente não preenchido" />
+
+						<p:outputLabel value="Tipo do processo: " />
+						<p:selectOneMenu filter="true"
+							converter="omnifaces.SelectItemsConverter"
+							value="#{processoBean.tipoAssunto}">
+							<f:selectItem noSelectionOption="true"
+								itemLabel="Selecione um tipo" />
+							<f:selectItems value="#{processoBean.tipos}" var="tipo"
+								itemValue="#{tipo}" itemLabel="#{tipo.nomeTipoAssunto}" />
+							<p:ajax listener="#{processoBean.comboAssunto}"
+								update=":formCadastro:assunto" />
+						</p:selectOneMenu>
+
+
+						<p:outputLabel value="Assunto" />
+						<p:selectOneMenu filter="true" id="assunto"
+							converter="omnifaces.SelectItemsConverter"
+							value="#{processoBean.processo.assunto}">
+							<f:selectItem noSelectionOption="true"
+								itemLabel="Selecione um assunto" />
+							<f:selectItems value="#{processoBean.assuntos}" var="assunto"
+								itemValue="#{assuntos}" itemLabel="#{assunto.nomeAssunto}" />
+						</p:selectOneMenu>
+
+						<p:outputLabel for="dataEntrada" value="Data de entrada: " />
+						<p:calendar id="dataEntrada"
+							value="#{processoBean.processo.dataEntrada}" required="true"
+							requiredMessage="Campo DATA DA ENTRADA não preenchido" />
+
+						<p:outputLabel for="servidor" value="Servidor Responsável: " />
+						<p:inputText id="servidor"
+							value="#{processoBean.processo.servidorResponsavel}"
+							required="true"
+							requiredMessage="Campo RESPONSÁVEL não preenchido" />
+
+
+						<p:outputLabel for="orgao" value="Remetente:" />
+						<p:selectOneMenu id="orgao" filter="true"
+							converter="omnifaces.SelectItemsConverter"
+							value="#{processoBean.orgao}" required="true"
+							requiredMessage="Orgão não preenchido">
+							<f:selectItem noSelectionOption="true"
+								itemLabel="Selecione um orgão" />
+							<f:selectItems value="#{processoBean.orgaos}" var="orgao"
+								itemValue="#{orgao}" itemLabel="#{orgao.sigla}" />
+							<p:ajax listener="#{processoBean.comboOrgao}"
+								update=":formCadastro:setor" />
+						</p:selectOneMenu>
+
+
+						<p:outputLabel for="setor" value=" " />
+						<p:selectOneMenu id="setor" filter="true" required="true"
+							requiredMessage="O campo 'Setor' é obrigatório"
+							converter="omnifaces.SelectItemsConverter"
+							value="#{processoBean.processo.setor}">
+							<f:selectItem noSelectionOption="true"
+								itemLabel="Selecione um Setor" />
+							<f:selectItems value="#{processoBean.setores}" var="setor"
+								itemValue="#{setor}" itemLabel="#{setor.nome}" />
+						</p:selectOneMenu>
+
+						<h:panelGrid columns="2">
+
+							<p:commandButton value="Salvar"
+								actionListener="#{processoBean.salvar}"
+								update=":mensagem :formCadastro:painel :formListagem:tabela">
+								<f:actionListener
+									type="org.omnifaces.eventlistener.ResetInputAjaxActionListener" />
+							</p:commandButton>
+							<p:commandButton value="Fechar"
+								oncomplete="PF('dialogo').hide();" />
+
+						</h:panelGrid>
+					</h:panelGrid>
+				</div>
+			</h:form>
+		</p:dialog>
+
+	</ui:define>
+</ui:composition>

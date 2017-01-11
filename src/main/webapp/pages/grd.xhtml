@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	template="/templates/modelo.xhtml">
+
+	<ui:define name="conteudo">
+		<p:panelGrid columns="2">
+			<h:form id="formListagem">
+				<p:panel header="Processos - Finalizados">
+					<p:dataTable id="tabela" emptyMessage="Nenhum registro encontrado"
+						paginator="true" rows="10" paginatorPosition="top" value="#{grdBean.processos}" var="grd" >
+
+						<p:column headerText="SPU: ">
+							<h:outputText value="#{grd.spu}"/>
+						</p:column>
+
+						<p:column headerText="Requerente: ">
+							<h:outputText value="#{grd.solicitante}"/>
+						</p:column>
+
+						<p:column headerText="Assunto: ">
+							<h:outputText value="#{grd.assunto}"/>
+						</p:column>
+
+						<p:column headerText="Data da entrada">
+							<h:outputText value="#{grd.dataEntrada}">
+								<f:convertDateTime locale="pt_BR" />
+							</h:outputText>
+						</p:column>
+
+						<p:column headerText="Servidor responsável: ">
+							<h:outputText value="#{grd.servidorResponsavel}" />
+						</p:column>
+
+						<p:column headerText="Opções: ">
+							<h:outputText />
+						</p:column>
+					</p:dataTable>
+				</p:panel>
+			</h:form>
+
+			<h:form id="formListagemGRD">
+				<p:panel header="GRD">
+					<p:dataTable id="tabelaGRD" emptyMessage="Nenhum registro encontrado"
+						paginator="true" rows="10" paginatorPosition="top" var="grd">
+
+						<p:column headerText="SPU: ">
+							<h:outputText />
+						</p:column>
+
+						<p:column headerText="Requerente: ">
+							<h:outputText />
+						</p:column>
+
+						<p:column headerText="Assunto: ">
+							<h:outputText />
+						</p:column>
+
+						<p:column headerText="Data da entrada">
+							<h:outputText>
+								<f:convertDateTime locale="pt_BR" />
+							</h:outputText>
+						</p:column>
+
+						<p:column headerText="Servidor responsável: ">
+							<h:outputText />
+						</p:column>
+
+						<p:column headerText="Remetente: ">
+							<h:outputText />
+						</p:column>
+					</p:dataTable>
+				</p:panel>
+			</h:form>
+		</p:panelGrid>
+	</ui:define>
+</ui:composition>
