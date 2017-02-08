@@ -24,19 +24,19 @@ import br.com.projetoarquivo.domain.TipoAssunto;
 @ManagedBean
 @ViewScoped
 public class ProcessoBean {
-	
-	
+
 	private Processo processo;
 	private List<Processo> processos;
-	
+
 	private List<Orgao> orgaos;
 	private Orgao orgao;
-	
+
 	private List<Setor> setores;
-	
+
 	private TipoAssunto tipoAssunto;
 	private List<TipoAssunto> tipos;
-	
+
+
 	private List<Assunto> assuntos;
 	
 
@@ -79,7 +79,6 @@ public class ProcessoBean {
 	public void setProcesso(Processo processo) {
 		this.processo = processo;
 	}
-	
 
 	public List<Orgao> getOrgaos() {
 		return orgaos;
@@ -108,22 +107,22 @@ public class ProcessoBean {
 	public void novo() {
 		try {
 			processo = new Processo();
-			
+
 			ProcessoDAO processoDAO = new ProcessoDAO();
 			processos = processoDAO.buscarPorStatus();
 
 			orgao = new Orgao();
 			OrgaoDAO orgaoDAO = new OrgaoDAO();
 			orgaos = orgaoDAO.listar();
-			
+
 			setores = new ArrayList<>();
-			
+
 			tipoAssunto = new TipoAssunto();
 			TipoAssuntoDAO tipoAssuntoDAO = new TipoAssuntoDAO();
 			tipos = tipoAssuntoDAO.listar();
-			
+
 			assuntos = new ArrayList<>();
-			
+
 		} catch (RuntimeException e) {
 			e.printStackTrace();
 			Messages.addGlobalError("Erro ao gerar um novo processo");
@@ -148,9 +147,9 @@ public class ProcessoBean {
 		try {
 			ProcessoDAO processoDAO = new ProcessoDAO();
 			processoDAO.merge(processo);
-			
+
 			novo();
-			
+
 			Messages.addGlobalError("Salvo com sucesso.");
 		} catch (RuntimeException e) {
 			Messages.addGlobalError("Erro ao salvar processo");
@@ -163,12 +162,12 @@ public class ProcessoBean {
 		try {
 
 			processo = (Processo) evento.getComponent().getAttributes().get("processoSelecionado");
-			
+
 			orgao = processo.getSetor().getOrgao();
-			
+
 			OrgaoDAO orgaoDAO = new OrgaoDAO();
 			orgaos = orgaoDAO.listar();
-			
+
 			SetorDAO setorDAO = new SetorDAO();
 			setores = setorDAO.BuscarOrgao(orgao.getCodigo());
 		} catch (RuntimeException e) {
@@ -177,9 +176,8 @@ public class ProcessoBean {
 		}
 
 	}
-	
-	
-	public void comboOrgao(){
+
+	public void comboOrgao() {
 		try {
 			if (orgao != null) {
 				SetorDAO setorDAO = new SetorDAO();
@@ -187,23 +185,22 @@ public class ProcessoBean {
 			} else {
 				setores = new ArrayList<>();
 			}
-			
+
 		} catch (RuntimeException e) {
 			e.printStackTrace();
 			Messages.addGlobalError("Erro ao filtrar setor");
 		}
-		
+
 	}
-	
-	
+
 	public void comboAssunto() {
 		if (tipoAssunto != null) {
 			AssuntoDAO assuntoDAO = new AssuntoDAO();
-			assuntos = assuntoDAO.listar();
-		}else {
+			assuntos = assuntoDAO.BuscarAssunto(tipoAssunto.getCodigo());
+		} else {
 			assuntos = new ArrayList<>();
 		}
-		
+
 	}
 
 }

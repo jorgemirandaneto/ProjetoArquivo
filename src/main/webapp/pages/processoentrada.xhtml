@@ -35,7 +35,7 @@
 					</p:column>
 
 					<p:column headerText="Assunto: ">
-						<h:outputText value="#{processo.assunto.nomeAssunto}" />
+						<h:outputText  />
 					</p:column>
 
 					<p:column headerText="Data de recebimento">
@@ -103,7 +103,7 @@
 							<f:selectItem noSelectionOption="true"
 								itemLabel="Selecione um assunto" />
 							<f:selectItems value="#{processoBean.assuntos}" var="assunto"
-								itemValue="#{assuntos}" itemLabel="#{assunto.nomeAssunto}" />
+								itemValue="#{assunto}" itemLabel="#{assunto.nomeAssunto}" />
 						</p:selectOneMenu>
 
 						<p:outputLabel for="dataEntrada" value="Data de entrada: " />
