@@ -93,13 +93,13 @@ public class FechamentoBean {
 			
 		String caminho = Faces.getRealPath("/reports/arquivo01.jasper");
 		
-		String caminhoimagem = Faces.getRealPath("/resources/imagens/arquivo.jpg");
+		//String caminhoimagem = Faces.getRealPath("/resources/imagens/arquivo.jpg");
 		
 		Map<String, Object> parametros = new HashMap<>();
 		
-		parametros.put("CODIGO", filtroID );
+		parametros.put("id", filtroID );
 		
-		parametros.put("caminho_imagem", caminhoimagem);
+		//parametros.put("caminho_imagem", caminhoimagem);
 	
 		System.out.println(parametros);
 		

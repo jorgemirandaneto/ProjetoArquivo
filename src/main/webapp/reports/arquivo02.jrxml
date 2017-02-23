@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
+<!-- 2017-02-23T18:04:18 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="arquivo02" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="5b4574b0-47e3-48c7-a026-0de21f3871c5">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="599" splitType="Stretch">
+			<image>
+				<reportElement x="30" y="0" width="550" height="170" uuid="b962da86-9ae6-4222-adeb-19011be382cb"/>
+				<imageExpression><![CDATA["src/main/webapp/resources/imagens/cabecalho.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement positionType="Float" x="48" y="80" width="60" height="20" uuid="a2267bc4-b45b-4b9c-acde-46a78e0be551">
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+				</reportElement>
+				<text><![CDATA[PARA:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="48" y="91" width="82" height="20" uuid="40265e78-b25f-47d6-bbe5-cc282427bb8c">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+				</reportElement>
+				<text><![CDATA[Nº INFORMAÇÃO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="48" y="102" width="82" height="20" uuid="a7d88c7d-cd84-455b-901d-8bfe85bbf919">
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+				</reportElement>
+				<text><![CDATA[REQUERIMENTO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="48" y="113" width="60" height="20" uuid="84106a00-e603-47b4-bcf1-5ca15801a574">
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+				</reportElement>
+				<text><![CDATA[ASSUNTO]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="61" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="125" splitType="Stretch"/>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

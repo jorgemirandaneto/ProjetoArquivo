@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
-<!-- 2017-02-09T12:42:52 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="CODIGO" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="1321b168-0cc1-439c-8cbf-a9c3867d597e">
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="projetoarquivo"/>
 	<parameter name="CODIGO" class="java.lang.Long"/>
-	<parameter name="caminho_imagem" class="java.lang.String"/>
 	<queryString language="SQL">
 		<![CDATA[SELECT processo.codigo,
 	processo.assunto,
@@ -50,7 +48,7 @@ WHERE
 		<band height="802" splitType="Stretch">
 			<image>
 				<reportElement x="-20" y="-20" width="590" height="822" uuid="cd933d15-2819-4e4f-b157-de1c6b844617"/>
-				<imageExpression><![CDATA[$P{caminho_imagem}]]></imageExpression>
+				<imageExpression><![CDATA["src/main/webapp/resources/imagens/0001.jpg"]]></imageExpression>
 			</image>
 			<textField>
 				<reportElement x="230" y="520" width="190" height="30" uuid="45150927-804e-43d5-8c3c-c458a733f439"/>
