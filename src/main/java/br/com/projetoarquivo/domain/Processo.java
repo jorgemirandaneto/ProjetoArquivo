@@ -46,23 +46,12 @@ public class Processo extends GenericDomain {
 	@ManyToOne
 	private Setor setor;
 
-	@JoinColumn
-	@ManyToOne
-	private TipoAssunto tipoAssunto;
 
 	@JoinColumn
 	@ManyToOne
 	private Assunto assunto;
 	
-	
 
-	public TipoAssunto getTipoAssunto() {
-		return tipoAssunto;
-	}
-
-	public void setTipoAssunto(TipoAssunto tipoAssunto) {
-		this.tipoAssunto = tipoAssunto;
-	}
 
 	public Assunto getAssunto() {
 		return assunto;

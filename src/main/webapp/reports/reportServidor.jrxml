@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
+<!-- 2017-03-09T17:12:00 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reportServidor" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="91996172-061f-427b-a460-e735f8d47747">
+	<property name="com.jaspersoft.studio.data.sql.tables" value="YXNzdW50byBBUyAsMzc3LDk0LGQ1OGYzNzllLWU2MzAtNDk0MS05NzI2LWI2Y2I1MzM1OTA2YTtw&#xA;cm9jZXNzbyBBUyAsMTgxLDkyLDVjMjViMDVmLTlkNTMtNDZiNy04MDQyLTU5MzExMTUwZDRiNTtz&#xA;ZXRvciBBUyAsNTYyLDMyNixlYzAyOGUxNS1mMDNkLTQxYWItYjYwZS1iYmIxYzk2M2FlNzM7dGlw&#xA;b2Fzc3VudG8gQVMgLDM4MywyNTEsNjJlOTU1ZjItYjVhNy00ZWUyLThiNjMtZGQ2YzA4MDFiMDJm&#xA;O29yZ2FvIEFTICw1OTgsMjA4LGQyMGY3NDIyLTJlNjctNDkzMC1hYmM2LTY5ZWJiNDAyYWVhZTs="/>
+	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w1" value="283"/>
+	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w2" value="711"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="projetoarquivocentral"/>
+	<parameter name="caminho_imagem" class="java.lang.String"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT processo.setor_codigo,
+	processo.assunto_codigo,
+	processo.status,
+	processo.spu,
+	processo.solicitante,
+	processo.situacao,
+	processo.servidorresponsavel,
+	processo.observacao,
+	processo.ndespacho,
+	processo.datasaida,
+	processo.codigo,
+	processo.dataentrada,
+	tipoassunto.codigo,
+	tipoassunto.nometipoassunto,
+	assunto.tipoassunto_codigo,
+	assunto.nomeassunto,
+	assunto.codigo,
+	setor.orgao_codigo,
+	setor.nome,
+	setor.codigo,
+	orgao.sigla,
+	orgao.codigo
+FROM processo
+	INNER JOIN setor ON 
+	 processo.setor_codigo = setor.codigo 
+	INNER JOIN orgao ON 
+	 setor.orgao_codigo = orgao.codigo 
+	INNER JOIN assunto ON 
+	 processo.assunto_codigo = assunto.codigo 
+	INNER JOIN tipoassunto ON 
+	 assunto.tipoassunto_codigo = tipoassunto.codigo]]>
+	</queryString>
+	<field name="setor_codigo" class="java.lang.Long"/>
+	<field name="assunto_codigo" class="java.lang.Long"/>
+	<field name="status" class="java.lang.String"/>
+	<field name="spu" class="java.lang.String"/>
+	<field name="solicitante" class="java.lang.String"/>
+	<field name="situacao" class="java.lang.Boolean"/>
+	<field name="servidorresponsavel" class="java.lang.String"/>
+	<field name="observacao" class="java.lang.String"/>
+	<field name="ndespacho" class="java.lang.String"/>
+	<field name="datasaida" class="java.sql.Date"/>
+	<field name="codigo" class="java.lang.Long"/>
+	<field name="dataentrada" class="java.sql.Date"/>
+	<field name="COLUMN_13" class="java.lang.Long"/>
+	<field name="nometipoassunto" class="java.lang.String"/>
+	<field name="tipoassunto_codigo" class="java.lang.Long"/>
+	<field name="nomeassunto" class="java.lang.String"/>
+	<field name="COLUMN_17" class="java.lang.Long"/>
+	<field name="orgao_codigo" class="java.lang.Long"/>
+	<field name="nome" class="java.lang.String"/>
+	<field name="COLUMN_20" class="java.lang.Long"/>
+	<field name="sigla" class="java.lang.String"/>
+	<field name="COLUMN_22" class="java.lang.Long"/>
+	<group name="setor_codigo">
+		<groupExpression><![CDATA[$F{setor_codigo}]]></groupExpression>
+	</group>
+	<group name="assunto_codigo">
+		<groupExpression><![CDATA[$F{assunto_codigo}]]></groupExpression>
+	</group>
+	<group name="status">
+		<groupExpression><![CDATA[$F{status}]]></groupExpression>
+	</group>
+	<group name="spu">
+		<groupExpression><![CDATA[$F{spu}]]></groupExpression>
+	</group>
+	<group name="solicitante">
+		<groupExpression><![CDATA[$F{solicitante}]]></groupExpression>
+	</group>
+	<group name="situacao">
+		<groupExpression><![CDATA[$F{situacao}]]></groupExpression>
+	</group>
+	<group name="servidorresponsavel">
+		<groupExpression><![CDATA[$F{servidorresponsavel}]]></groupExpression>
+	</group>
+	<group name="observacao">
+		<groupExpression><![CDATA[$F{observacao}]]></groupExpression>
+	</group>
+	<group name="ndespacho">
+		<groupExpression><![CDATA[$F{ndespacho}]]></groupExpression>
+	</group>
+	<group name="datasaida">
+		<groupExpression><![CDATA[$F{datasaida}]]></groupExpression>
+	</group>
+	<group name="codigo">
+		<groupExpression><![CDATA[$F{codigo}]]></groupExpression>
+	</group>
+	<group name="dataentrada">
+		<groupExpression><![CDATA[$F{dataentrada}]]></groupExpression>
+	</group>
+	<group name="COLUMN_13">
+		<groupExpression><![CDATA[$F{COLUMN_13}]]></groupExpression>
+	</group>
+	<group name="nometipoassunto">
+		<groupExpression><![CDATA[$F{nometipoassunto}]]></groupExpression>
+	</group>
+	<group name="tipoassunto_codigo">
+		<groupExpression><![CDATA[$F{tipoassunto_codigo}]]></groupExpression>
+	</group>
+	<group name="nomeassunto">
+		<groupExpression><![CDATA[$F{nomeassunto}]]></groupExpression>
+	</group>
+	<group name="COLUMN_17">
+		<groupExpression><![CDATA[$F{COLUMN_17}]]></groupExpression>
+	</group>
+	<group name="orgao_codigo">
+		<groupExpression><![CDATA[$F{orgao_codigo}]]></groupExpression>
+	</group>
+	<group name="nome">
+		<groupExpression><![CDATA[$F{nome}]]></groupExpression>
+	</group>
+	<group name="COLUMN_20">
+		<groupExpression><![CDATA[$F{COLUMN_20}]]></groupExpression>
+	</group>
+	<group name="sigla">
+		<groupExpression><![CDATA[$F{sigla}]]></groupExpression>
+	</group>
+	<group name="COLUMN_22">
+		<groupExpression><![CDATA[$F{COLUMN_22}]]></groupExpression>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="802" splitType="Stretch">
+			<image>
+				<reportElement x="-20" y="-10" width="590" height="812" uuid="4fb258a7-102c-496a-af30-3abbb6cd435b"/>
+				<imageExpression><![CDATA["src/main/webapp/resources/imagens/despacho.png"]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement x="160" y="120" width="40" height="14" uuid="80fe569e-d3ef-4781-b621-29142cad8d8e"/>
+				<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="210" y="120" width="120" height="14" uuid="e3ba5749-e9b2-443a-8019-a3b3c22442b0"/>
+				<textFieldExpression><![CDATA[$F{sigla}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement positionType="FixRelativeToBottom" x="200" y="120" width="10" height="14" uuid="4440f128-7ac5-4332-a9e3-31418744b390"/>
+				<text><![CDATA[-]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="160" y="130" width="70" height="20" uuid="1b276f4b-e174-4c9e-9152-074086d4057d"/>
+				<textFieldExpression><![CDATA[$F{ndespacho}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement positionType="FixRelativeToBottom" x="160" y="140" width="100" height="20" uuid="4a73a920-7f74-4946-b00c-0e7a0c8dfca7">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{solicitante}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="155" y="150" width="80" height="20" uuid="2248cfd3-6f23-42d5-8d55-931a22e3a77f"/>
+				<textFieldExpression><![CDATA[$F{nomeassunto}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+</jasperReport>
