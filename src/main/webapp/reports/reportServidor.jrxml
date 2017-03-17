@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
-<!-- 2017-03-16T18:29:07 -->
+<!-- 2017-03-17T10:03:46 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reportServidor" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="91996172-061f-427b-a460-e735f8d47747">
-	<property name="com.jaspersoft.studio.data.sql.tables" value="YXNzdW50byBBUyAsMzc3LDk0LGQ1OGYzNzllLWU2MzAtNDk0MS05NzI2LWI2Y2I1MzM1OTA2YTtw&#xA;cm9jZXNzbyBBUyAsMTgxLDkyLDVjMjViMDVmLTlkNTMtNDZiNy04MDQyLTU5MzExMTUwZDRiNTtz&#xA;ZXRvciBBUyAsNTYyLDMyNixlYzAyOGUxNS1mMDNkLTQxYWItYjYwZS1iYmIxYzk2M2FlNzM7dGlw&#xA;b2Fzc3VudG8gQVMgLDM4MywyNTEsNjJlOTU1ZjItYjVhNy00ZWUyLThiNjMtZGQ2YzA4MDFiMDJm&#xA;O29yZ2FvIEFTICw1OTgsMjA4LGQyMGY3NDIyLTJlNjctNDkzMC1hYmM2LTY5ZWJiNDAyYWVhZTs="/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value="cHJvY2Vzc28gLDE1LDE1LDY4ODYwNDM2LTZmZGYtNGY3My05Mzk3LTRkMjllMWJhZWUyODtzZXRv&#xA;ciAsMTg1LDYxLDM5MDE1YWY2LWI3ZjMtNDFlMi1hNjA0LTI3ODFhYWE0MGQwMTt0aXBvYXNzdW50&#xA;byAsNDk2LDIxNyxkNDEzZTAwNS05MTI2LTRiNjAtOWVmNy01MDA0NGJiNmU5OGM7b3JnYW8gLDM3&#xA;NCwxNDksYTAxNzU1YTctZDFjYi00YjZmLWFjZGMtOGJlYzEwODlkZWEzO2Fzc3VudG8gLDE4NSwy&#xA;MDQsOTAwM2YyMDQtMmNmMi00NmVhLTk2YWQtYzZjODlmODc5MTViOw=="/>
 	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w1" value="283"/>
 	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w2" value="711"/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="projetoarquivocentral"/>
+	<parameter name="id" class="java.lang.Long"/>
 	<parameter name="caminho_imagem" class="java.lang.String"/>
 	<queryString language="SQL">
 		<![CDATA[SELECT processo.setor_codigo,
@@ -38,7 +39,9 @@ FROM processo
 	INNER JOIN assunto ON 
 	 processo.assunto_codigo = assunto.codigo 
 	INNER JOIN tipoassunto ON 
-	 assunto.tipoassunto_codigo = tipoassunto.codigo]]>
+	 assunto.tipoassunto_codigo = tipoassunto.codigo 
+WHERE 
+	 $P{id} = processo.codigo]]>
 	</queryString>
 	<field name="setor_codigo" class="java.lang.Long"/>
 	<field name="assunto_codigo" class="java.lang.Long"/>
@@ -135,7 +138,7 @@ FROM processo
 		<band height="802" splitType="Stretch">
 			<image>
 				<reportElement x="-20" y="-10" width="600" height="812" uuid="4fb258a7-102c-496a-af30-3abbb6cd435b"/>
-				<imageExpression><![CDATA["src/main/webapp/resources/imagens/despacho.png"]]></imageExpression>
+				<imageExpression><![CDATA[$P{caminho_imagem}]]></imageExpression>
 			</image>
 			<textField>
 				<reportElement x="70" y="220" width="420" height="71" uuid="b5802774-ec6e-43eb-880c-0e77dd42a5e5"/>

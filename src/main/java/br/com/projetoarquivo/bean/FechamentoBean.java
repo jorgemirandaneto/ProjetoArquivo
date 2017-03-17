@@ -49,7 +49,7 @@ public class FechamentoBean {
 	public void listar() {
 		try {
 			ProcessoDAO processoDAO = new ProcessoDAO();
-			processos = processoDAO.buscarPorStatus();
+			processos = processoDAO.listar();
 		} catch (RuntimeException e) {
 			e.printStackTrace();
 		}
@@ -91,7 +91,7 @@ public class FechamentoBean {
 		
 		Long filtroID = processo.getCodigo();
 			
-		String caminho = Faces.getRealPath("/reports/arquivo01.jasper");
+		String caminho = Faces.getRealPath("/reports/reportServidor.jasper");
 		
 		String caminhoimagem = Faces.getRealPath("/resources/imagens/despacho.png");
 		
