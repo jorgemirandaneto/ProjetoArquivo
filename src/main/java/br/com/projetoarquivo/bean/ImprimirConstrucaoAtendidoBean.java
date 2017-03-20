@@ -14,16 +14,17 @@ import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperPrintManager;
 
-public class ImprimirBean implements IImpressaoProcesso {
-	Processo processo = new Processo();
+public class ImprimirConstrucaoAtendidoBean implements IImpressaoProcesso {
 
+	Processo processo = new Processo();
+	
 	@Override
 	public void imprimir(Long idLong) {
 		try {
 
 			Long filtroID = idLong;
 
-			String caminho = Faces.getRealPath("/reports/reportServidor.jasper");
+			String caminho = Faces.getRealPath("");
 
 			// String caminhoimagem =
 			// Faces.getRealPath("/resources/imagens/despacho.png");
@@ -43,7 +44,7 @@ public class ImprimirBean implements IImpressaoProcesso {
 		} catch (JRException e) {
 			e.printStackTrace();
 		}
-
+		
 	}
 
 }

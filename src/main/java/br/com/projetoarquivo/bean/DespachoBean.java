@@ -11,6 +11,7 @@ import org.omnifaces.util.Messages;
 
 import br.com.projetoarquivo.dao.ProcessoDAO;
 import br.com.projetoarquivo.domain.Processo;
+import br.com.projetoarquivo.interfaces.IImpressaoProcesso;
 
 @ManagedBean
 @ViewScoped
@@ -74,15 +75,10 @@ public class DespachoBean {
 	public void imprimir(ActionEvent event) {
 
 		processo = (Processo) event.getComponent().getAttributes().get("impressaoSelecionado");
-
 		try {
-			if (processo.getAssunto().getTipoAssunto().getCodigo() == 2 && processo.isSituacao() == true) {
-				ImprimirBean imprimirBean = new ImprimirBean();
-				imprimirBean.imprimirConstrucao(processo.getCodigo());
-			}else{
-				ImprimirBean imprimirBean = new ImprimirBean();		
-				imprimirBean.imprimir(processo.getCodigo());
-			}
+			IImpressaoProcesso impressaoProcesso = ImpressaoFactory.getInstanceImpressao(processo.getAssunto().getTipoAssunto().getCodigo());
+			impressaoProcesso.imprimir(processo.getCodigo());
+			
 		} catch (RuntimeException e) {
 			e.printStackTrace();
 			Messages.addGlobalError("Erro ao gerar despacho.");

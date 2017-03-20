@@ -6,8 +6,7 @@
 	
 	<!-- Definição do PhaseListener da Autenticação -->
 
-	<!-- <lifecycle>
+	 <lifecycle>
 		<phase-listener>br.com.projetoarquivo.util.AutenticacaoListener</phase-listener>
-	</lifecycle> -->
-
+	</lifecycle>
 </faces-config>

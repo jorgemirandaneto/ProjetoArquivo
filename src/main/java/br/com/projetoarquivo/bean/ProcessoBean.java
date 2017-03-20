@@ -150,9 +150,9 @@ public class ProcessoBean {
 
 			novo();
 
-			Messages.addGlobalError("Salvo com sucesso.");
+			Messages.addGlobalInfo("Salvo com sucesso.");
 		} catch (RuntimeException e) {
-			Messages.addGlobalError("Erro ao salvar processo");
+			Messages.addGlobalInfo("Erro ao salvar processo");
 			e.printStackTrace();
 		}
 
