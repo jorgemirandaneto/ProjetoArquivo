@@ -13,7 +13,7 @@ public class ProcessoDAOTest {
 	@Ignore
 	public void listar(){
 		ProcessoDAO processoDAO = new ProcessoDAO();
-		List<Processo> resultado = processoDAO.buscarPorStatus();
+		List<Processo> resultado = processoDAO.buscarPorStatus(true);
 		for(Processo processo : resultado){
 			System.out.println(processo.getSolicitante());
 		}

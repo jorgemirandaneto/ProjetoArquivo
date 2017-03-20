@@ -109,7 +109,7 @@ public class ProcessoBean {
 			processo = new Processo();
 
 			ProcessoDAO processoDAO = new ProcessoDAO();
-			processos = processoDAO.buscarPorStatus();
+			processos = processoDAO.buscarPorStatus(false);
 
 			orgao = new Orgao();
 			OrgaoDAO orgaoDAO = new OrgaoDAO();
@@ -134,7 +134,7 @@ public class ProcessoBean {
 	public void listar() {
 		try {
 			ProcessoDAO processoDAO = new ProcessoDAO();
-			processos = processoDAO.buscarPorStatus();
+			processos = processoDAO.buscarPorStatus(false);
 		} catch (RuntimeException e) {
 			e.printStackTrace();
 			Messages.addGlobalError("Erro ao listar");

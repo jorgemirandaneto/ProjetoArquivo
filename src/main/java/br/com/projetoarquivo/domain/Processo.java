@@ -30,6 +30,10 @@ public class Processo extends GenericDomain {
 	@Temporal(TemporalType.DATE)
 	private Date dataSaida;
 
+	public void setSituacao(boolean situacao) {
+		this.situacao = situacao;
+	}
+
 	@Column(length = 150)
 	private String observacao;
 
@@ -45,7 +49,6 @@ public class Processo extends GenericDomain {
 	@JoinColumn
 	@ManyToOne
 	private Setor setor;
-
 
 	@JoinColumn
 	@ManyToOne
@@ -125,13 +128,7 @@ public class Processo extends GenericDomain {
 		this.nDespacho = nDespacho;
 	}
 
-	public boolean isSituacao() {
-		return situacao;
-	}
-
-	public void setSituacao(boolean situacao) {
-		this.situacao = situacao;
-	}
+	
 
 	public Character getStatus() {
 		return status;
@@ -139,6 +136,10 @@ public class Processo extends GenericDomain {
 
 	public void setStatus(Character status) {
 		this.status = status;
+	}
+	
+	public boolean isSituacao() {
+		return situacao;
 	}
 
 }

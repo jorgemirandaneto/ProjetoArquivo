@@ -22,16 +22,18 @@
 		<div id="cabecalho" class="divCabecalho">
 			<h:form id="formMenu">
 				<div align="right">
-				<p:commandLink actionListener="#{autenticacaoBean.encerrar}">
-					<p:outputLabel value="Sair" />
-				</p:commandLink>
+					<p:commandLink actionListener="#{autenticacaoBean.encerrar}">
+						<p:outputLabel value="Sair" />
+					</p:commandLink>
 				</div>
 				<p:menubar>
 					<p:submenu label="Processos">
 						<p:menuitem value="Processo - Entrada"
 							url="/pages/processoentrada.xhtml" />
-						<p:menuitem value="Processo - Saída"
+						<p:menuitem value="Processo - Finalizar"
 							url="/pages/processosaida.xhtml" />
+						<p:menuitem value="Processo - Despacho"
+							url="/pages/despacho.xhtml" />
 					</p:submenu>
 
 					<p:submenu label="GRD">

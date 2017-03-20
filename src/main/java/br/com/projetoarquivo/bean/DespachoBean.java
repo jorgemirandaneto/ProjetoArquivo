@@ -14,7 +14,7 @@ import br.com.projetoarquivo.domain.Processo;
 
 @ManagedBean
 @ViewScoped
-public class FechamentoBean {
+public class DespachoBean {
 
 	private Processo processo;
 
@@ -40,7 +40,7 @@ public class FechamentoBean {
 	public void listar() {
 		try {
 			ProcessoDAO processoDAO = new ProcessoDAO();
-			processos = processoDAO.buscarPorStatus(false);
+			processos = processoDAO.buscarPorStatus(true);
 		} catch (RuntimeException e) {
 			e.printStackTrace();
 		}
@@ -59,7 +59,7 @@ public class FechamentoBean {
 			ProcessoDAO processoDAO = new ProcessoDAO();
 			processoDAO.merge(processo);
 
-			processos = processoDAO.buscarPorStatus(false);
+			processos = processoDAO.buscarPorStatus(true);
 
 			processo = new Processo();
 			Messages.addGlobalInfo("Salvo com sucesso.");
@@ -69,6 +69,25 @@ public class FechamentoBean {
 			e.printStackTrace();
 		}
 
+	}
+
+	public void imprimir(ActionEvent event) {
+
+		processo = (Processo) event.getComponent().getAttributes().get("impressaoSelecionado");
+
+		try {
+			if (processo.getAssunto().getTipoAssunto().getCodigo() == 2 && processo.isSituacao() == true) {
+				ImprimirBean imprimirBean = new ImprimirBean();
+				imprimirBean.imprimirConstrucao(processo.getCodigo());
+			}else{
+				ImprimirBean imprimirBean = new ImprimirBean();		
+				imprimirBean.imprimir(processo.getCodigo());
+			}
+		} catch (RuntimeException e) {
+			e.printStackTrace();
+			Messages.addGlobalError("Erro ao gerar despacho.");
+		}
+		
 	}
 
 }

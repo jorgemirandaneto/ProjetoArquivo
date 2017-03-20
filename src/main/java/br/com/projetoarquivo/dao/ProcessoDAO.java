@@ -12,11 +12,11 @@ import br.com.projetoarquivo.util.HibernateUtil;
 public class ProcessoDAO extends GenericDAO<Processo>{
 	
 	@SuppressWarnings("unchecked")
-	public List<Processo> buscarPorStatus(){
+	public List<Processo> buscarPorStatus(Boolean status){
 		Session sessao = HibernateUtil.getFabricaDeSessoes().openSession();
 		try{
 			Criteria consulta = sessao.createCriteria(Processo.class);
-			consulta.add(Restrictions.eq("situacao", false));
+			consulta.add(Restrictions.eq("situacao", status));
 			List<Processo> resultado = consulta.list();
 			return resultado;
 		}catch (RuntimeException erro){
