@@ -70,4 +70,32 @@ public class ImprimirBean {
 			e.printStackTrace();
 		}
 	}
+	
+	public void imprimirConstrucaoNaoEncontrado(Long idLong) {
+
+
+		try {
+
+			Long filtroID = idLong;
+
+			String caminho = Faces.getRealPath("/reports/reportConstrucao2.jasper");
+
+			//String caminhoimagem = Faces.getRealPath("/resources/imagens/despacho.png");
+
+			Map<String, Object> parametros = new HashMap<>();
+
+			parametros.put("id", filtroID);
+
+			//parametros.put("caminho_imagem", caminhoimagem);
+
+			Connection conexao = HibernateUtil.getConexao();
+
+			JasperPrint relatorio = JasperFillManager.fillReport(caminho, parametros, conexao);
+
+			JasperPrintManager.printReport(relatorio, true);
+
+		} catch (JRException e) {
+			e.printStackTrace();
+		}
+	}
 }

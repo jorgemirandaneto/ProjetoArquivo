@@ -76,13 +76,17 @@ public class DespachoBean {
 		processo = (Processo) event.getComponent().getAttributes().get("impressaoSelecionado");
 
 		try {
-			if (processo.getAssunto().getTipoAssunto().getCodigo() == 2 && processo.isSituacao() == true) {
+			if (processo.getAssunto().getTipoAssunto().getCodigo() == 2 && processo.getStatus() == 'A') {
+				ImprimirBean imprimirBean = new ImprimirBean();
+				imprimirBean.imprimirConstrucaoNaoEncontrado(processo.getCodigo());
+			}else if (processo.getAssunto().getTipoAssunto().getCodigo() == 2) {
 				ImprimirBean imprimirBean = new ImprimirBean();
 				imprimirBean.imprimirConstrucao(processo.getCodigo());
-			}else{
-				ImprimirBean imprimirBean = new ImprimirBean();		
+			}else {
+				ImprimirBean imprimirBean = new ImprimirBean();
 				imprimirBean.imprimir(processo.getCodigo());
 			}
+				
 		} catch (RuntimeException e) {
 			e.printStackTrace();
 			Messages.addGlobalError("Erro ao gerar despacho.");

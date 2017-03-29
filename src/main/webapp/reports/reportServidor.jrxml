@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
-<!-- 2017-03-20T16:05:49 -->
+<!-- 2017-03-29T09:58:38 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reportServidor" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="91996172-061f-427b-a460-e735f8d47747">
 	<property name="com.jaspersoft.studio.data.sql.tables" value="cHJvY2Vzc28gLDE1LDE1LDY4ODYwNDM2LTZmZGYtNGY3My05Mzk3LTRkMjllMWJhZWUyODtzZXRv&#xA;ciAsMTg1LDYxLDM5MDE1YWY2LWI3ZjMtNDFlMi1hNjA0LTI3ODFhYWE0MGQwMTt0aXBvYXNzdW50&#xA;byAsNDk2LDIxNyxkNDEzZTAwNS05MTI2LTRiNjAtOWVmNy01MDA0NGJiNmU5OGM7b3JnYW8gLDM3&#xA;NCwxNDksYTAxNzU1YTctZDFjYi00YjZmLWFjZGMtOGJlYzEwODlkZWEzO2Fzc3VudG8gLDE4NSwy&#xA;MDQsOTAwM2YyMDQtMmNmMi00NmVhLTk2YWQtYzZjODlmODc5MTViOw=="/>
 	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w1" value="283"/>
@@ -198,6 +198,10 @@ WHERE
 					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
 				</reportElement>
 				<textFieldExpression><![CDATA[$F{nomeassunto}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="73" y="672" width="100" height="30" uuid="96c491b2-98b1-4e8c-b254-ce4aa714e85e"/>
+				<textFieldExpression><![CDATA[new java.text.SimpleDateFormat("dd/MM/yyyy").format(new Date())]]></textFieldExpression>
 			</textField>
 		</band>
 	</title>
