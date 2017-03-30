@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	template="/templates/modelo.xhtml">
+
+	<ui:define name="conteudo">
+		<h:form id="formListagem">
+			<p:panel header="Cadastro de setor">
+				<p:dataTable id="tabela" emptyMessage="Nenhum registro encontrado"
+					paginator="true" rows="10" paginatorPosition="top"
+					value="#{setorBean.setores}" var="setor">
+					<f:facet name="header">
+						<p:commandButton value="Novo" actionListener="#{setorBean.novo}"
+							oncomplete="PF('dialogo').show();">
+						</p:commandButton>
+					</f:facet>
+
+
+
+					<p:column headerText="Órgão">
+						<div align="center">
+							<h:outputText value="#{setor.orgao.sigla}" />
+						</div>
+					</p:column>
+
+					<p:column headerText="Setor ">
+						<div align="center">
+							<h:outputText value="#{setor.nome}" />
+						</div>
+					</p:column>
+
+
+					<p:column headerText="Opções"
+						style=" width: 195px;  height: 35px; ">
+						<div align="center">
+							<p:commandButton value="Editar" icon="ui-icon-pencil">
+								<f:attribute name="setorSelecionado" value="#{setor}" />
+							</p:commandButton>
+						</div>
+					</p:column>
+				</p:dataTable>
+			</p:panel>
+		</h:form>
+
+
+
+		<p:dialog header="Cadastro - Setor" widgetVar="dialogo"
+			closable="false" modal="true" position="center" resizable="false"
+			draggable="false">
+			<h:form>
+				<h:panelGrid>
+					<p:outputLabel value="Setor: " />
+					<p:inputText value="#{setorBean.setor.nome}" required="true"
+						requiredMessage="Nome não preenchido">
+					</p:inputText>
+
+					<p:outputLabel value="Órgão" />
+					<p:selectOneMenu >
+						<f:selectItem noSelectionOption="true"
+							itemLabel="Selecione um assunto" />
+						<f:selectItems value="#{setorBean.orgaos}" var="setor"
+							itemValue="#{setor}" itemLabel="#{setorBean.setor.orgao.sigla}" />
+					</p:selectOneMenu>
+
+				</h:panelGrid>
+			</h:form>
+
+		</p:dialog>
+	</ui:define>
+</ui:composition>
